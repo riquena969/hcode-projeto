@@ -11,9 +11,7 @@ import { createReadStream, existsSync, renameSync, unlinkSync } from 'fs';
 
 @Injectable()
 export class UserService {
-  constructor(
-    private prisma: PrismaService,
-  ) {}
+  constructor(private prisma: PrismaService) {}
 
   async get(id: number, hash = false) {
     id = Number(id);

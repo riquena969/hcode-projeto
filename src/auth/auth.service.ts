@@ -110,6 +110,9 @@ export class AuthService {
       },
     });
 
-    return this.passwordService.updatePassword(passwordRecovery.userId, password);
+    return this.passwordService.updatePassword(
+      passwordRecovery.userId,
+      password,
+    );
   }
 }
