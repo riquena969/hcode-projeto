@@ -1,16 +1,16 @@
-import { AuthController } from './auth.controller';
 import { Module } from '@nestjs/common';
+import { AddressService } from './address.service';
+import { AddressController } from './address.controller';
+import { PrismaModule } from 'src/prisma/prisma.module';
 import { UserModule } from 'src/user/user.module';
 import { JwtModule } from '@nestjs/jwt';
-import { PrismaModule } from 'src/prisma/prisma.module';
-import { MailModule } from 'src/mail/mail.module';
-import { AuthService } from './auth.service';
+import { AuthModule } from 'src/auth/auth.module';
 
 @Module({
   imports: [
-    MailModule,
     PrismaModule,
     UserModule,
+    AuthModule,
     JwtModule.registerAsync({
       useFactory: () => ({
         secret: process.env.JWT_SECRET,
@@ -20,8 +20,7 @@ import { AuthService } from './auth.service';
       }),
     }),
   ],
-  controllers: [AuthController],
-  providers: [AuthService],
-  exports: [AuthService],
+  controllers: [AddressController],
+  providers: [AddressService],
 })
-export class AuthModule {}
+export class AddressModule {}

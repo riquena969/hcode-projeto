@@ -100,7 +100,11 @@ export class AuthController {
     @Body('newPassword') newPassword,
     @User('id') id,
   ) {
-    return this.passwordService.changePassword(id, currentPassword, newPassword);
+    return this.passwordService.changePassword(
+      id,
+      currentPassword,
+      newPassword,
+    );
   }
 
   @Post('forget')

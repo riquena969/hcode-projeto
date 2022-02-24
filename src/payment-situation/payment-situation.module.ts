@@ -1,16 +1,16 @@
-import { AuthController } from './auth.controller';
 import { Module } from '@nestjs/common';
-import { UserModule } from 'src/user/user.module';
-import { JwtModule } from '@nestjs/jwt';
+import { PaymentSituationService } from './payment-situation.service';
+import { PaymentSituationController } from './payment-situation.controller';
 import { PrismaModule } from 'src/prisma/prisma.module';
-import { MailModule } from 'src/mail/mail.module';
-import { AuthService } from './auth.service';
+import { UserModule } from 'src/user/user.module';
+import { AuthModule } from 'src/auth/auth.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
-    MailModule,
     PrismaModule,
     UserModule,
+    AuthModule,
     JwtModule.registerAsync({
       useFactory: () => ({
         secret: process.env.JWT_SECRET,
@@ -20,8 +20,7 @@ import { AuthService } from './auth.service';
       }),
     }),
   ],
-  controllers: [AuthController],
-  providers: [AuthService],
-  exports: [AuthService],
+  controllers: [PaymentSituationController],
+  providers: [PaymentSituationService],
 })
-export class AuthModule {}
+export class PaymentSituationModule {}
